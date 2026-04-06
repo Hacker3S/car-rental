@@ -71,7 +71,7 @@ export default async function Dashboard() {
                        {tx.status}
                      </span>
                   </td>
-                  <td className="p-4 font-medium">${tx.total_cost.toFixed(2)}</td>
+                  <td className="p-4 font-medium">${Number(tx.total_cost || 0).toFixed(2)}</td>
                 </tr>
               ))}
               {recentTx.length === 0 && (

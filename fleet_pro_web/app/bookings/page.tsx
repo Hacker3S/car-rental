@@ -133,7 +133,7 @@ export default function BookingsPage() {
                   <td className="p-3">{tx.car}</td>
                   <td className="p-3 text-muted-foreground">{tx.start_date}</td>
                   <td className="p-3 text-muted-foreground">{tx.end_date}</td>
-                  <td className="p-3 font-medium">${tx.total_cost?.toFixed(2)}</td>
+                  <td className="p-3 font-medium">${Number(tx.total_cost || 0).toFixed(2)}</td>
                   <td className="p-3">
                     <button onClick={() => openReturn(tx)}
                       className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition">
@@ -175,9 +175,9 @@ export default function BookingsPage() {
                       {tx.status}
                     </span>
                   </td>
-                  <td className="p-3 font-medium">${tx.total_cost?.toFixed(2)}</td>
+                  <td className="p-3 font-medium">${Number(tx.total_cost || 0).toFixed(2)}</td>
                   <td className="p-3 text-muted-foreground">
-                    {tx.penalty ? <span className="text-amber-400">${tx.penalty?.toFixed(2)}</span> : '—'}
+                    {tx.penalty ? <span className="text-amber-400">${Number(tx.penalty || 0).toFixed(2)}</span> : '—'}
                   </td>
                 </tr>
               ))}

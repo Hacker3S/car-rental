@@ -143,7 +143,7 @@ export default function FleetPage() {
                 <td className="p-3">{car.model}</td>
                 <td className="p-3 text-muted-foreground">{car.year}</td>
                 <td className="p-3 text-muted-foreground">{car.category}</td>
-                <td className="p-3 font-medium">${car.price_per_day}</td>
+                <td className="p-3 font-medium">${Number(car.price_per_day || 0).toFixed(2)}</td>
                 <td className="p-3 text-muted-foreground">{car.mileage?.toLocaleString()} km</td>
                 <td className="p-3 text-muted-foreground">{car.supplier ?? '—'}</td>
                 <td className="p-3">
