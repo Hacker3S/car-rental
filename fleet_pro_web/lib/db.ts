@@ -10,21 +10,35 @@ const client = createClient({
   authToken: authToken,
 })
 
+// Helper to convert LibSQL BigInts to numbers for JSON/TS compatibility
+function convertNumbers(obj: any): any {
+  if (obj === null || typeof obj !== 'object') {
+    return typeof obj === 'bigint' ? Number(obj) : obj
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(convertNumbers)
+  }
+  const newObj: any = {}
+  for (const [key, val] of Object.entries(obj)) {
+    newObj[key] = convertNumbers(val)
+  }
+  return newObj
+}
+
 export async function getDb() {
   // Return an object that mimics the sqlite-style methods used in the app
   return {
     all: async (sql: string, args: any[] = []) => {
       const rs = await client.execute({ sql, args })
-      // LibSQL rows are objects, so we can return them as-is
-      return rs.rows
+      return rs.rows.map(r => convertNumbers(r))
     },
     get: async (sql: string, args: any[] = []) => {
       const rs = await client.execute({ sql, args })
-      return rs.rows[0]
+      return rs.rows[0] ? convertNumbers(rs.rows[0]) : null
     },
     run: async (sql: string, args: any[] = []) => {
       const rs = await client.execute({ sql, args })
-      return { lastID: rs.lastInsertRowid }
+      return { lastID: convertNumbers(rs.lastInsertRowid) }
     }
   }
 }

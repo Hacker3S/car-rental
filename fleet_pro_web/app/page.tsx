@@ -4,13 +4,13 @@ import { Car, CheckCircle, Clock } from 'lucide-react'
 export default async function Dashboard() {
   const db = await getDb()
   const totalCarsRaw = await db.get(`SELECT COUNT(*) as c FROM cars`)
-  const totalCars = totalCarsRaw?.c || 0
+  const totalCars = Number(totalCarsRaw?.c || 0)
   
   const availableRaw = await db.get(`SELECT COUNT(*) as c FROM cars WHERE status='Available'`)
-  const available = availableRaw?.c || 0
+  const available = Number(availableRaw?.c || 0)
   
   const activeRaw = await db.get(`SELECT COUNT(*) as c FROM transactions WHERE status='Active'`)
-  const activeRentals = activeRaw?.c || 0
+  const activeRentals = Number(activeRaw?.c || 0)
   
   const recentTx = await db.all(`
     SELECT t.id, c.name, cr.brand, cr.model, t.status, t.total_cost 
