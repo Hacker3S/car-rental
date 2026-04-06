@@ -15,6 +15,8 @@ const STATUS_COLORS: Record<string, string> = {
   Maintenance: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function FleetPage() {
   const [cars, setCars] = useState<CarRow[]>([])
   const [suppliers, setSuppliers] = useState<Supplier[]>([])

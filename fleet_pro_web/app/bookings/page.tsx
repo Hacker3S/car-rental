@@ -11,6 +11,8 @@ type Transaction = {
 type Customer = { id: number; name: string }
 type Car = { id: number; brand: string; model: string; price_per_day: number }
 
+export const dynamic = 'force-dynamic'
+
 export default function BookingsPage() {
   const [active, setActive] = useState<Transaction[]>([])
   const [all, setAll] = useState<Transaction[]>([])

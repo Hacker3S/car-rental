@@ -1,6 +1,8 @@
 import { getDb } from '@/lib/db'
 import { Car, CheckCircle, Clock } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Dashboard() {
   const db = await getDb()
   const totalCarsRaw = await db.get(`SELECT COUNT(*) as c FROM cars`)
