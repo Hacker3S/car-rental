@@ -1,0 +1,11 @@
+{
+    "TX0001": {
+        "transaction_id": "TX0001",
+        "car_id": "C001",
+        "customer_id": "U001",
+        "start_date": "2023-10-01",
+        "end_date": "2023-10-06",
+        "total_cost": 325.0,
+        "status": "completed"
+    }
+}

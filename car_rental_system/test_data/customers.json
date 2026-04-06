@@ -1,0 +1,11 @@
+{
+    "U001": {
+        "customer_id": "U001",
+        "name": "Alice",
+        "contact": "123-456",
+        "license_number": "DL123",
+        "rental_history": [
+            "TX0001"
+        ]
+    }
+}

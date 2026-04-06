@@ -1,0 +1,90 @@
+{
+    "C001": {
+        "car_id": "C001",
+        "brand": "Maruti",
+        "model": "Swift",
+        "year": 2022,
+        "category": "sedan",
+        "rental_price_per_day": 1500.0,
+        "status": "available",
+        "mileage": 12000,
+        "supplier_id": "S001"
+    },
+    "C002": {
+        "car_id": "C002",
+        "brand": "Hyundai",
+        "model": "Creta",
+        "year": 2023,
+        "category": "SUV",
+        "rental_price_per_day": 2500.0,
+        "status": "rented",
+        "mileage": 8000,
+        "supplier_id": "S001"
+    },
+    "C003": {
+        "car_id": "C003",
+        "brand": "Toyota",
+        "model": "Innova Crysta",
+        "year": 2021,
+        "category": "SUV",
+        "rental_price_per_day": 3000.0,
+        "status": "maintenance",
+        "mileage": 45000,
+        "supplier_id": "S001"
+    },
+    "C004": {
+        "car_id": "C004",
+        "brand": "Honda",
+        "model": "City",
+        "year": 2023,
+        "category": "sedan",
+        "rental_price_per_day": 2000.0,
+        "status": "available",
+        "mileage": 5000,
+        "supplier_id": "S002"
+    },
+    "C005": {
+        "car_id": "C005",
+        "brand": "Tata",
+        "model": "Nexon",
+        "year": 2022,
+        "category": "SUV",
+        "rental_price_per_day": 2200.0,
+        "status": "rented",
+        "mileage": 15000,
+        "supplier_id": "S002"
+    },
+    "C006": {
+        "car_id": "C006",
+        "brand": "Mahindra",
+        "model": "XUV700",
+        "year": 2023,
+        "category": "SUV",
+        "rental_price_per_day": 3500.0,
+        "status": "available",
+        "mileage": 10000,
+        "supplier_id": "S002"
+    },
+    "C007": {
+        "car_id": "C007",
+        "brand": "BMW",
+        "model": "5 Series",
+        "year": 2022,
+        "category": "luxury",
+        "rental_price_per_day": 8000.0,
+        "status": "available",
+        "mileage": 4000,
+        "supplier_id": "S003"
+    },
+    "C008": {
+        "car_id": "C008",
+        "brand": "Mercedes-Benz",
+        "model": "C-Class",
+        "year": 2023,
+        "category": "luxury",
+        "rental_price_per_day": 8500.0,
+        "status": "rented",
+        "mileage": 2000,
+        "supplier_id": "S003"
+    }
+}

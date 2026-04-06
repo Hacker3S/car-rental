@@ -1,0 +1,8 @@
+{
+    "S001": {
+        "supplier_id": "S001",
+        "name": "FleetCo",
+        "contact": "contact@fleet.com",
+        "cars_supplied": []
+    }
+}

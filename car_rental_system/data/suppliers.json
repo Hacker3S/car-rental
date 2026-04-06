@@ -1,0 +1,31 @@
+{
+    "S001": {
+        "supplier_id": "S001",
+        "name": "Sai Fleet Rentals",
+        "contact": "sai.fleet@example.com",
+        "cars_supplied": [
+            "C001",
+            "C002",
+            "C003"
+        ]
+    },
+    "S002": {
+        "supplier_id": "S002",
+        "name": "Metro Cabs India",
+        "contact": "metro.cabs@example.com",
+        "cars_supplied": [
+            "C004",
+            "C005",
+            "C006"
+        ]
+    },
+    "S003": {
+        "supplier_id": "S003",
+        "name": "Luxury Wheels Delhi",
+        "contact": "luxury.delhi@example.com",
+        "cars_supplied": [
+            "C007",
+            "C008"
+        ]
+    }
+}

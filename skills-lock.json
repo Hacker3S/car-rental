@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "data-viz-2025": {
+      "source": "erichowens/some_claude_skills",
+      "sourceType": "github",
+      "computedHash": "34fad44614f66487174f22da8b4983bbcf89005d0e567e176f47841df0fa98eb"
+    },
+    "ui-design-system": {
+      "source": "samhvw8/dot-claude",
+      "sourceType": "github",
+      "computedHash": "da805b478040b37f22d4ca74134bdad1f281f390f605fda2add000fec01df3c7"
+    }
+  }
+}

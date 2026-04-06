@@ -1,0 +1,47 @@
+{
+    "U001": {
+        "customer_id": "U001",
+        "name": "Rajesh Kumar",
+        "contact": "9876543210",
+        "license_number": "DL-1012023",
+        "rental_history": [
+            "TX4",
+            "TX1"
+        ]
+    },
+    "U002": {
+        "customer_id": "U002",
+        "name": "Priya Sharma",
+        "contact": "9876543211",
+        "license_number": "DL-1022023",
+        "rental_history": [
+            "TX5",
+            "TX2"
+        ]
+    },
+    "U003": {
+        "customer_id": "U003",
+        "name": "Amit Patel",
+        "contact": "9876543212",
+        "license_number": "DL-1032023",
+        "rental_history": [
+            "TX3"
+        ]
+    },
+    "U004": {
+        "customer_id": "U004",
+        "name": "Sneha Gupta",
+        "contact": "9876543213",
+        "license_number": "DL-1042023",
+        "rental_history": []
+    },
+    "U005": {
+        "customer_id": "U005",
+        "name": "Vikram Singh",
+        "contact": "9876543214",
+        "license_number": "DL-1052023",
+        "rental_history": [
+            "TX6"
+        ]
+    }
+}

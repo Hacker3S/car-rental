@@ -1,0 +1,6 @@
+customtkinter
+tkcalendar
+matplotlib
+pillow
+fpdf2
+CTkMessagebox

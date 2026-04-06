@@ -1,0 +1,22 @@
+{
+    "C001": {
+        "car_id": "C001",
+        "brand": "Toyota",
+        "model": "Camry",
+        "year": 2022,
+        "category": "sedan",
+        "rental_price_per_day": 50.0,
+        "status": "available",
+        "mileage": 150
+    },
+    "C002": {
+        "car_id": "C002",
+        "brand": "Honda",
+        "model": "CRV",
+        "year": 2021,
+        "category": "SUV",
+        "rental_price_per_day": 70.0,
+        "status": "available",
+        "mileage": 0
+    }
+}

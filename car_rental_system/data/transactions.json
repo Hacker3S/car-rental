@@ -1,0 +1,56 @@
+{
+    "TX4": {
+        "transaction_id": "TX4",
+        "car_id": "C001",
+        "customer_id": "U001",
+        "start_date": "2023-01-10",
+        "end_date": "2023-01-12",
+        "total_cost": 4500.0,
+        "status": "completed"
+    },
+    "TX5": {
+        "transaction_id": "TX5",
+        "car_id": "C004",
+        "customer_id": "U002",
+        "start_date": "2023-02-15",
+        "end_date": "2023-02-18",
+        "total_cost": 8000.0,
+        "status": "completed"
+    },
+    "TX6": {
+        "transaction_id": "TX6",
+        "car_id": "C006",
+        "customer_id": "U005",
+        "start_date": "2023-03-01",
+        "end_date": "2023-03-03",
+        "total_cost": 10500.0,
+        "status": "completed"
+    },
+    "TX1": {
+        "transaction_id": "TX1",
+        "car_id": "C002",
+        "customer_id": "U001",
+        "start_date": "2023-10-01",
+        "end_date": "2023-10-05",
+        "total_cost": 12500.0,
+        "status": "active"
+    },
+    "TX2": {
+        "transaction_id": "TX2",
+        "car_id": "C005",
+        "customer_id": "U002",
+        "start_date": "2023-10-02",
+        "end_date": "2023-10-06",
+        "total_cost": 11000.0,
+        "status": "active"
+    },
+    "TX3": {
+        "transaction_id": "TX3",
+        "car_id": "C008",
+        "customer_id": "U003",
+        "start_date": "2023-10-04",
+        "end_date": "2023-10-08",
+        "total_cost": 42500.0,
+        "status": "active"
+    }
+}
