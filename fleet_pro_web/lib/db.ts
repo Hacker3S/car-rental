@@ -1,16 +1,23 @@
 import { createClient } from '@libsql/client'
 import path from 'path'
 
-// Client is created once and reused
-const url = process.env.TURSO_DATABASE_URL || `file:${path.join(process.cwd(), '../fleet_pro/fleet_pro.db')}`
+// Get credentials from environment
+const url = process.env.TURSO_DATABASE_URL
 const authToken = process.env.TURSO_AUTH_TOKEN
 
+// Fallback to local file for dev, but in production we MUST have a URL
+const clientUrl = url || `file:${path.join(process.cwd(), '../fleet_pro/fleet_pro.db')}`
+
 const client = createClient({
-  url: url,
+  url: clientUrl,
   authToken: authToken,
 })
 
-// Helper to convert LibSQL BigInts to numbers for JSON/TS compatibility
+// Log connection status in production for debugging (without leaking the secret)
+if (process.env.NODE_ENV === 'production' && !url) {
+  console.error("⚠️ DATA ERROR: TURSO_DATABASE_URL is missing in environment variables!")
+}
+
 function convertNumbers(obj: any): any {
   if (obj === null || typeof obj !== 'object') {
     return typeof obj === 'bigint' ? Number(obj) : obj
@@ -26,19 +33,33 @@ function convertNumbers(obj: any): any {
 }
 
 export async function getDb() {
-  // Return an object that mimics the sqlite-style methods used in the app
   return {
     all: async (sql: string, args: any[] = []) => {
-      const rs = await client.execute({ sql, args })
-      return rs.rows.map(r => convertNumbers(r))
+      try {
+        const rs = await client.execute({ sql, args })
+        return rs.rows.map(r => convertNumbers(r))
+      } catch (err: any) {
+        console.error(`❌ DB ALL Error [${sql}]:`, err.message)
+        throw err
+      }
     },
     get: async (sql: string, args: any[] = []) => {
-      const rs = await client.execute({ sql, args })
-      return rs.rows[0] ? convertNumbers(rs.rows[0]) : null
+      try {
+        const rs = await client.execute({ sql, args })
+        return rs.rows[0] ? convertNumbers(rs.rows[0]) : null
+      } catch (err: any) {
+        console.error(`❌ DB GET Error [${sql}]:`, err.message)
+        throw err
+      }
     },
     run: async (sql: string, args: any[] = []) => {
-      const rs = await client.execute({ sql, args })
-      return { lastID: convertNumbers(rs.lastInsertRowid) }
+      try {
+        const rs = await client.execute({ sql, args })
+        return { lastID: convertNumbers(rs.lastInsertRowid) }
+      } catch (err: any) {
+        console.error(`❌ DB RUN Error [${sql}]:`, err.message)
+        throw err
+      }
     }
   }
 }
