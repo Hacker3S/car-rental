@@ -4,23 +4,57 @@ import { Car, CheckCircle, Clock } from 'lucide-react'
 export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
-  const db = await getDb()
-  const totalCarsRaw = await db.get(`SELECT COUNT(*) as c FROM cars`)
-  const totalCars = Number(totalCarsRaw?.c || 0)
-  
-  const availableRaw = await db.get(`SELECT COUNT(*) as c FROM cars WHERE status='Available'`)
-  const available = Number(availableRaw?.c || 0)
-  
-  const activeRaw = await db.get(`SELECT COUNT(*) as c FROM transactions WHERE status='Active'`)
-  const activeRentals = Number(activeRaw?.c || 0)
-  
-  const recentTx = await db.all(`
-    SELECT t.id, c.name, cr.brand, cr.model, t.status, t.total_cost 
-    FROM transactions t
-    JOIN customers c ON t.customer_id = c.id
-    JOIN cars cr ON t.car_id = cr.id
-    ORDER BY t.id DESC LIMIT 5
-  `) || []
+  let totalCars = 0
+  let available = 0
+  let activeRentals = 0
+  let recentTx: any[] = []
+  let error: string | null = null
+
+  try {
+    const db = await getDb()
+    const totalCarsRaw = await db.get(`SELECT COUNT(*) as c FROM cars`)
+    totalCars = Number(totalCarsRaw?.c || 0)
+    
+    const availableRaw = await db.get(`SELECT COUNT(*) as c FROM cars WHERE status='Available'`)
+    available = Number(availableRaw?.c || 0)
+    
+    const activeRaw = await db.get(`SELECT COUNT(*) as c FROM transactions WHERE status='Active'`)
+    activeRentals = Number(activeRaw?.c || 0)
+    
+    recentTx = await db.all(`
+      SELECT t.id, c.name, cr.brand, cr.model, t.status, t.total_cost 
+      FROM transactions t
+      JOIN customers c ON t.customer_id = c.id
+      JOIN cars cr ON t.car_id = cr.id
+      ORDER BY t.id DESC LIMIT 5
+    `) || []
+  } catch (err: any) {
+    console.error("❌ Dashboard Load Error:", err.message)
+    error = err.message
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 text-center p-8 border border-dashed border-border rounded-2xl bg-card/50">
+        <div className="text-4xl">🛠️</div>
+        <h1 className="text-2xl font-bold text-white">Database Setup Required</h1>
+        <p className="text-muted-foreground max-w-md">
+          It looks like your database tables haven't been created yet or the connection is missing.
+        </p>
+        <a 
+          href="/api/migrate" 
+          className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-colors"
+        >
+          Initialize Database Schema
+        </a>
+        {error.includes('400') && (
+           <p className="text-xs text-muted-foreground/60 mt-4 italic">
+             Note: HTTP 400 errors from Turso usually indicate missing tables in the remote database.
+           </p>
+        )}
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-8 max-w-6xl mx-auto">

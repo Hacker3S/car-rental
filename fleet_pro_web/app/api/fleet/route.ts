@@ -14,11 +14,20 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const db = await getDb()
-  const { brand, model, year, category, price_per_day, mileage, supplier_id } = await req.json()
+  const data = await req.json()
+  const { brand, model, year, category, price_per_day, mileage, supplier_id } = data
+  
+  const safe_year = Number(year || 0)
+  const safe_price = Number(price_per_day || 0)
+  const safe_mileage = Number(mileage || 0)
+  const safe_supplier = supplier_id ? Number(supplier_id) : null
+
+  console.log("🛠️ INSERTING CAR:", { brand, model, safe_year, category, safe_price, safe_mileage, safe_supplier })
+
   const result = await db.run(
     `INSERT INTO cars (brand, model, year, category, price_per_day, mileage, supplier_id, status)
      VALUES (?, ?, ?, ?, ?, ?, ?, 'Available')`,
-    [brand, model, year, category, price_per_day, mileage, supplier_id || null]
+    [brand || '', model || '', safe_year, category || '', safe_price, safe_mileage, safe_supplier]
   )
   return NextResponse.json({ id: result.lastID })
 }

@@ -25,12 +25,24 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const db = await getDb()
-  const { customer_id, car_id, start_date, end_date, total_cost } = await req.json()
+  const data = await req.json()
+  const { customer_id, car_id, start_date, end_date, total_cost } = data
+  
+  const mid = Number(customer_id || 0)
+  const cid = Number(car_id || 0)
+  const cost = Number(total_cost || 0)
+
+  if (!mid || !cid) {
+    return NextResponse.json({ error: "Missing customer_id or car_id" }, { status: 400 })
+  }
+
+  console.log("🛠️ BOOKING DATA:", { mid, cid, start_date, end_date, cost })
+
   const result = await db.run(
     `INSERT INTO transactions (customer_id, car_id, start_date, end_date, total_cost, status) VALUES (?, ?, ?, ?, ?, 'Active')`,
-    [customer_id, car_id, start_date, end_date, total_cost]
+    [mid, cid, start_date || '', end_date || '', cost]
   )
-  await db.run(`UPDATE cars SET status='Rented' WHERE id=?`, [car_id])
-  await db.run(`UPDATE customers SET total_rentals=total_rentals+1 WHERE id=?`, [customer_id])
+  await db.run(`UPDATE cars SET status='Rented' WHERE id=?`, [cid])
+  await db.run(`UPDATE customers SET total_rentals=total_rentals+1 WHERE id=?`, [mid])
   return NextResponse.json({ id: result.lastID })
 }

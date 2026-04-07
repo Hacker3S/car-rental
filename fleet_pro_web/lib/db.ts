@@ -39,7 +39,11 @@ export async function getDb() {
         const rs = await client.execute({ sql, args })
         return rs.rows.map(r => convertNumbers(r))
       } catch (err: any) {
-        console.error(`❌ DB ALL Error [${sql}]:`, err.message)
+        if (err.message?.includes('status 400')) {
+          console.error(`❌ DB ALL Error (Status 400): Is the schema initialized on Turso? Try visiting /api/migrate`)
+        } else {
+          console.error(`❌ DB ALL Error [${sql}]:`, err.message)
+        }
         throw err
       }
     },
@@ -48,7 +52,11 @@ export async function getDb() {
         const rs = await client.execute({ sql, args })
         return rs.rows[0] ? convertNumbers(rs.rows[0]) : null
       } catch (err: any) {
-        console.error(`❌ DB GET Error [${sql}]:`, err.message)
+        if (err.message?.includes('status 400')) {
+          console.error(`❌ DB GET Error (Status 400): Is the schema initialized on Turso? Try visiting /api/migrate`)
+        } else {
+          console.error(`❌ DB GET Error [${sql}]:`, err.message)
+        }
         throw err
       }
     },
